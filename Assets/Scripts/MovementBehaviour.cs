@@ -10,6 +10,7 @@ public class MovementBehaviour : MonoBehaviour
     protected Rigidbody _rigidBody;
 
     protected Vector3 _desiredMovementDirection = Vector3.zero;
+    protected GameObject _target;
 
     protected bool _grounded = false;
 
