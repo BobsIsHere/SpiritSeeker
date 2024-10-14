@@ -46,11 +46,6 @@ public class PlayerCharacter : BasicCharacter
         HandleMovementInput();
     }
 
-    private void FixedUpdate()
-    {
-        OverlapSpirit();
-    }
-
     void HandleMovementInput()
     {
         if (_movementBehaviour == null || _movementAction == null)
@@ -64,34 +59,13 @@ public class PlayerCharacter : BasicCharacter
         _movementBehaviour.DesiredMovementDirection = movement;
     }
 
-    private void OverlapSpirit()
-    {
-        //Collider[] colliders = Physics.OverlapSphere(transform.position, 1.0f);
-
-        //while (colliders.Length > 0)
-        //{
-        //    foreach (Collider collider in colliders)
-        //    {
-        //        if (collider.tag == SPIRIT_TAG)
-        //        {
-        //            Destroy(collider.gameObject);
-        //        }
-        //    }
-        //}
-    }
-
     const string SPIRIT_TAG = "Spirit";
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag != SPIRIT_TAG)
+        if(other.tag == SPIRIT_TAG)
         {
-            return;
+            Destroy(other.gameObject);
         }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        Destroy(other.gameObject);
     }
 }
