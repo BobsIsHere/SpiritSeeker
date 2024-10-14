@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class RespawnPoint : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    private GameObject _respawnTemplate = null;
+
+    private void OnEnable()
     {
-        
+        RespawnPointManager.Instance.RegisterRespawnPoint(this);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDisable()
     {
-        
+        if(RespawnPointManager.Exists)
+        {
+            RespawnPointManager.Instance.UnregisterSpawnPoint(this);
+        }
+    }
+
+    public GameObject Respawn()
+    {
+        return Instantiate(_respawnTemplate, transform.position, transform.rotation);
     }
 }

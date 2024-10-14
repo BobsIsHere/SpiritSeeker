@@ -11,11 +11,23 @@ public class PlayerCharacter : BasicCharacter
     [SerializeField]
     private InputActionReference _movementAction;
 
+    private Health _playerHealth;
+
+    const string SPIRIT_TAG = "Spirit";
+    const string ENEMY_TAG = "Enemy";
+
     protected override void Awake()
     {
         base.Awake();
 
         if (_inputAsset == null)
+        {
+            return;
+        }
+
+        _playerHealth = GetComponent<Health>();
+
+        if (_playerHealth == null)
         {
             return;
         }
@@ -59,13 +71,26 @@ public class PlayerCharacter : BasicCharacter
         _movementBehaviour.DesiredMovementDirection = movement;
     }
 
-    const string SPIRIT_TAG = "Spirit";
-
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == SPIRIT_TAG)
         {
             Destroy(other.gameObject);
+        }
+        else if (other.tag == ENEMY_TAG)
+        {
+            _playerHealth.TakeDamage(1);
+            ResetPosition();
+        }
+    }
+
+    private void ResetPosition()
+    {
+        RespawnPoint respawnPoint = RespawnPointManager.Instance.GetNearestRespawnPoint(transform.position);
+
+        if(respawnPoint != null)
+        {
+            transform.position = respawnPoint.transform.position;
         }
     }
 }
