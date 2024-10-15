@@ -75,7 +75,10 @@ public class PlayerCharacter : BasicCharacter
     {
         if(other.tag == SPIRIT_TAG)
         {
-            Destroy(other.gameObject);
+            Spirit spirit = other.GetComponent<Spirit>();
+            spirit.CollectSpirit();
+
+            other.gameObject.SetActive(false);
         }
         else if (other.tag == ENEMY_TAG)
         {
