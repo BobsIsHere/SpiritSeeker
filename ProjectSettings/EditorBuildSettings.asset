@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/SpiritSeeker.unity
+    guid: a12c40b6872ec5d498ac4d59cd9d3461
   m_configObjects: {}
