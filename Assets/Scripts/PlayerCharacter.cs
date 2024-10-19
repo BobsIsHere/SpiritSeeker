@@ -11,6 +11,15 @@ public class PlayerCharacter : BasicCharacter
     [SerializeField]
     private InputActionReference _movementAction;
 
+    [SerializeField]
+    private InputActionReference _castSpellAction;
+
+    [SerializeField]
+    private InputActionReference _switchSpellAction;
+
+    [SerializeField]
+    private MagicStaff _magicStaff;
+
     private Health _playerHealth;
 
     const string SPIRIT_TAG = "Spirit";
@@ -56,6 +65,7 @@ public class PlayerCharacter : BasicCharacter
     private void Update()
     {
         HandleMovementInput();
+        //HandleSpellInput();
     }
 
     void HandleMovementInput()
@@ -69,6 +79,16 @@ public class PlayerCharacter : BasicCharacter
         Vector2 movementInput = _movementAction.action.ReadValue<Vector2>();
         Vector3 movement = new Vector3(movementInput.x, 0, movementInput.y);
         _movementBehaviour.DesiredMovementDirection = movement;
+    }
+
+    void HandleSpellInput()
+    {
+        bool castSpell = _castSpellAction.action.triggered;
+
+        if (castSpell)
+        {
+            _magicStaff.CastSpell();
+        }
     }
 
     private void OnTriggerEnter(Collider other)

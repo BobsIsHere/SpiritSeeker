@@ -14,9 +14,11 @@ public class NavMeshMovementBehaviour : MovementBehaviour
     private float _wanderTimer;
     private float _wanderDuration = 5.0f;
     private float _wanderCooldown = 3.0f;
+    private float _freezeEndTime;
 
     private bool _isWandering = false;
     private bool _isPaused = false;
+    private bool _isFrozen = false;
 
     protected override void Awake()
     {
@@ -31,6 +33,16 @@ public class NavMeshMovementBehaviour : MovementBehaviour
 
     protected override void FixedUpdate()
     {
+        if(_isFrozen)
+        {
+            if(Time.time >= _freezeEndTime)
+            {
+                Unfreeze();
+            }
+
+            return;
+        }
+
         if (_isWandering)
         {
             _wanderTimer += Time.fixedDeltaTime;
@@ -82,5 +94,21 @@ public class NavMeshMovementBehaviour : MovementBehaviour
             _navMeshAgent.SetDestination(_wanderTarget);
             _navMeshAgent.isStopped = false;
         }
+    }
+
+    public void Freeze(float freezeDuration)
+    {
+        if(!_isFrozen)
+        {
+            _isFrozen = true;
+            _freezeEndTime = Time.time + freezeDuration;
+            _navMeshAgent.isStopped = true;
+        }
+    }
+
+    private void Unfreeze()
+    {
+        _isFrozen = false;
+        _navMeshAgent.isStopped = false;
     }
 }

@@ -4,23 +4,36 @@ using UnityEngine;
 
 public class MagicStaff : MonoBehaviour
 {
-    public GameObject _yellowSpell;
+    //[SerializeField]
+    //public GameObject _yellowSpell;
+
+    [SerializeField]
     public GameObject _blueSpell;
+
+    [SerializeField]
     public GameObject _redSpell;
 
     private float spellCooldown = 1.0f;
+
+    private enum SpellType
+    {
+        //Yellow,
+        Blue,
+        Red
+    }
+    private SpellType currentSpell = SpellType.Blue;
 
     private void Update()
     {
         
     }
 
-    private void SwitchSpell()
+    public void SwitchSpell()
     {
 
     }
 
-    private void CastSpell()
+    public void CastSpell()
     {
 
     }
