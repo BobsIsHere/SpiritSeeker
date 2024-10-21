@@ -9,6 +9,9 @@ public class Health : MonoBehaviour
 
     private int _currentLives;
 
+    public delegate void HealthChange(float startHealth, float currentHealth);
+    public event HealthChange OnHealthChanged;
+
     public int MaxLives
     {
         get
@@ -33,6 +36,8 @@ public class Health : MonoBehaviour
     public void TakeDamage(int amount)
     {
         _currentLives -= amount;
+
+        OnHealthChanged?.Invoke(_maxLives, _currentLives);
 
         if (_currentLives <= 0)
         {

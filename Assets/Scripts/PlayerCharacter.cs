@@ -65,7 +65,7 @@ public class PlayerCharacter : BasicCharacter
     private void Update()
     {
         HandleMovementInput();
-        HandleSpellInput();
+        //HandleSpellInput();
     }
 
     void HandleMovementInput()
@@ -93,15 +93,18 @@ public class PlayerCharacter : BasicCharacter
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("new collidor");
+
         if(other.tag == SPIRIT_TAG)
         {
             Spirit spirit = other.GetComponent<Spirit>();
-            spirit.CollectSpirit();
+            spirit.IsSpiritCollected = true;
 
             other.gameObject.SetActive(false);
         }
         else if (other.tag == ENEMY_TAG)
         {
+            Debug.Log(other);
             _playerHealth.TakeDamage(1);
             ResetPosition();
         }

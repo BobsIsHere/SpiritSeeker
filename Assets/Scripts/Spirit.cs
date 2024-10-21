@@ -6,13 +6,15 @@ public class Spirit : MonoBehaviour
 {
     private bool _isSpiritCollected = false;
 
-    public bool IsSpiritCollected()
+    public bool IsSpiritCollected
     {
-        return _isSpiritCollected;
-    }
-
-    public void CollectSpirit()
-    {
-        _isSpiritCollected = true;
+        get
+        {
+            return _isSpiritCollected;
+        }
+        set
+        {
+            _isSpiritCollected = value;
+        }
     }
 }

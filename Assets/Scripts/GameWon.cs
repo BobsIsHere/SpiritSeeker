@@ -31,7 +31,7 @@ public class GameWon : MonoBehaviour
     {
         for(int idx = 0; idx < _spirits.Length; ++idx)
         {
-            if (!_spirits[idx].GetComponent<Spirit>().IsSpiritCollected())
+            if (!_spirits[idx].GetComponent<Spirit>().IsSpiritCollected)
             {
                 return false;
             }
