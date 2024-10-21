@@ -5,15 +5,15 @@ using UnityEngine;
 public class MagicStaff : MonoBehaviour
 {
     //[SerializeField]
-    //public GameObject _yellowSpell;
+    //public Spell _yellowSpell;
 
     [SerializeField]
-    public GameObject _blueSpell;
+    public Spell _blueSpell;
 
     [SerializeField]
-    public GameObject _redSpell;
+    public Spell _redSpell;
 
-    private float spellCooldown = 1.0f;
+    private float spellCooldown = 5.0f;
 
     private enum SpellType
     {

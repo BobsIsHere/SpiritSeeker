@@ -7,9 +7,9 @@ public class BlueSpell : Spell
     [SerializeField]
     private float freezeDuration = 3.0f;
 
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
     }
 
     void OnTriggerEnter(Collider other)

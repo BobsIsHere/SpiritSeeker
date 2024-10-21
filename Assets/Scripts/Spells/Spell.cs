@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class Spell : MonoBehaviour
 {
+    private const string KILL_METHOD = "Kill";
+
     [SerializeField]
     private float spellSpeed = 10.0f;
 
     [SerializeField]
     private float spellDuration = 5.0f;
 
-    protected virtual void Start()
+    protected virtual void Awake()
     {
-        Destroy(gameObject, spellDuration);
+        Invoke(KILL_METHOD, spellDuration);
     }
 
     protected virtual void Update()

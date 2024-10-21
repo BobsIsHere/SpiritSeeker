@@ -7,9 +7,9 @@ public class RedSpell : Spell
     [SerializeField]
     private float pushForce = 10.0f;
 
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
     }
 
     void OnTriggerEnter(Collider other)
