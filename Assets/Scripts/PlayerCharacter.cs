@@ -22,6 +22,11 @@ public class PlayerCharacter : BasicCharacter
 
     private Health _playerHealth;
 
+    private Rigidbody _rigidbody;
+
+    private const float _cooldownTimer = 0.5f;
+    private float _currentCooldownTimer = 0.0f;
+
     const string SPIRIT_TAG = "Spirit";
     const string ENEMY_TAG = "Enemy";
 
@@ -37,6 +42,13 @@ public class PlayerCharacter : BasicCharacter
         _playerHealth = GetComponent<Health>();
 
         if (_playerHealth == null)
+        {
+            return;
+        }
+
+        _rigidbody = GetComponent<Rigidbody>();
+
+        if (_rigidbody == null)
         {
             return;
         }
@@ -66,6 +78,8 @@ public class PlayerCharacter : BasicCharacter
     {
         HandleMovementInput();
         //HandleSpellInput();
+
+        _currentCooldownTimer += Time.deltaTime;
     }
 
     void HandleMovementInput()
@@ -83,11 +97,19 @@ public class PlayerCharacter : BasicCharacter
 
     void HandleSpellInput()
     {
-        bool castSpell = _castSpellAction.action.triggered;
+        if (_magicStaff == null)
+        {
+            return;
+        }
 
-        if (castSpell)
+        if (_castSpellAction.action.triggered)
         {
             _magicStaff.CastSpell();
+        }
+
+        if (_switchSpellAction.action.triggered)
+        {
+            _magicStaff.SwitchSpell();
         }
     }
 
@@ -95,7 +117,7 @@ public class PlayerCharacter : BasicCharacter
     {
         Debug.Log("new collidor");
 
-        if(other.tag == SPIRIT_TAG)
+        if (other.tag == SPIRIT_TAG)
         {
             Spirit spirit = other.GetComponent<Spirit>();
             spirit.IsSpiritCollected = true;
@@ -104,9 +126,14 @@ public class PlayerCharacter : BasicCharacter
         }
         else if (other.tag == ENEMY_TAG)
         {
-            Debug.Log(other);
-            _playerHealth.TakeDamage(1);
-            ResetPosition();
+            if (_currentCooldownTimer >= _cooldownTimer)
+            {
+                _currentCooldownTimer = 0.0f;
+
+                Debug.Log(other);
+                ResetPosition();
+                _playerHealth.TakeDamage(1);
+            }
         }
     }
 
@@ -114,9 +141,9 @@ public class PlayerCharacter : BasicCharacter
     {
         RespawnPoint respawnPoint = RespawnPointManager.Instance.GetNearestRespawnPoint(transform.position);
 
-        if(respawnPoint != null)
+        if (respawnPoint != null)
         {
-            transform.position = respawnPoint.transform.position;
+            _rigidbody.MovePosition(respawnPoint.transform.position);
         }
     }
 }
