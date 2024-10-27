@@ -4,37 +4,46 @@ using UnityEngine;
 
 public class MagicStaff : MonoBehaviour
 {
-    //[SerializeField]
-    //public Spell _yellowSpell;
-
     [SerializeField]
-    public Spell _blueSpell;
+    private List<Spell> _spellPrefabs = new List<Spell>();
 
-    [SerializeField]
-    public Spell _redSpell;
+    private Spell _currentSpell = null;
+    private int _currentSpellIndex = 0;
 
-    private float spellCooldown = 5.0f;
-
-    private enum SpellType
+    private void Start()
     {
-        //Yellow,
-        Blue,
-        Red
-    }
-    private SpellType currentSpell = SpellType.Blue;
-
-    private void Update()
-    {
-        
+        if (_spellPrefabs.Count > 0)
+        {
+            _currentSpell = _spellPrefabs[_currentSpellIndex];
+        }
     }
 
     public void SwitchSpell()
     {
+        if (_spellPrefabs.Count == 0)
+        {
+            return;
+        }
 
+        Debug.Log("Spell prefabs count: " + _spellPrefabs.Count);
+
+        //Cycle to next spell
+        _currentSpellIndex = (_currentSpellIndex + 1) % _spellPrefabs.Count;
+        _currentSpell = _spellPrefabs[_currentSpellIndex];
+
+        //Print out spell name
+        Debug.Log("Current spell: " + _currentSpell.name);
     }
 
     public void CastSpell()
     {
+        if (_currentSpell == null)
+        {
+            return;
+        }
 
+        // Instantiate & cast current spell
+        Spell spellInstance = Instantiate(_currentSpell, transform.position, transform.rotation);
+        spellInstance.transform.forward = transform.forward;
     }
 }

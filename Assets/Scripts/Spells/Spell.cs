@@ -26,4 +26,9 @@ public class Spell : MonoBehaviour
     {
         transform.Translate(Vector3.forward * spellSpeed * Time.deltaTime);
     }
+
+    private void Kill()
+    {
+        Destroy(gameObject);
+    }
 }

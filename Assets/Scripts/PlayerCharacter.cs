@@ -24,8 +24,8 @@ public class PlayerCharacter : BasicCharacter
 
     private Rigidbody _rigidbody;
 
-    private const float _cooldownTimer = 0.5f;
-    private float _currentCooldownTimer = 0.0f;
+    private const float _coolDownTimer = 0.5f;
+    private float _currentCoolDownTimer = 0.0f;
 
     const string SPIRIT_TAG = "Spirit";
     const string ENEMY_TAG = "Enemy";
@@ -77,9 +77,9 @@ public class PlayerCharacter : BasicCharacter
     private void Update()
     {
         HandleMovementInput();
-        //HandleSpellInput();
+        HandleSpellInput();
 
-        _currentCooldownTimer += Time.deltaTime;
+        _currentCoolDownTimer += Time.deltaTime;
     }
 
     void HandleMovementInput()
@@ -97,14 +97,14 @@ public class PlayerCharacter : BasicCharacter
 
     void HandleSpellInput()
     {
-        if (_magicStaff == null)
+        if (_magicStaff == null && _attackBehaviour == null)
         {
             return;
         }
 
         if (_castSpellAction.action.triggered)
         {
-            _magicStaff.CastSpell();
+            _attackBehaviour.Attack();
         }
 
         if (_switchSpellAction.action.triggered)
@@ -115,8 +115,6 @@ public class PlayerCharacter : BasicCharacter
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("new collidor");
-
         if (other.tag == SPIRIT_TAG)
         {
             Spirit spirit = other.GetComponent<Spirit>();
@@ -126,11 +124,10 @@ public class PlayerCharacter : BasicCharacter
         }
         else if (other.tag == ENEMY_TAG)
         {
-            if (_currentCooldownTimer >= _cooldownTimer)
+            if (_currentCoolDownTimer >= _coolDownTimer)
             {
-                _currentCooldownTimer = 0.0f;
+                _currentCoolDownTimer = 0.0f;
 
-                Debug.Log(other);
                 ResetPosition();
                 _playerHealth.TakeDamage(1);
             }

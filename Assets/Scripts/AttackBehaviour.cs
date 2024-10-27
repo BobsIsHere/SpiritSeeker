@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AttackBehaviour : MonoBehaviour
@@ -10,18 +11,39 @@ public class AttackBehaviour : MonoBehaviour
     [SerializeField]
     private GameObject _staffSocket = null;
 
-    private MagicStaff _staff;
+    [SerializeField]
+    private float _attackCooldown = 5.0f;
+
+    private MagicStaff _magicStaff;
+    private bool _isOnCooldown = false;
 
     private void Awake()
     {
-        if (_staff != null && _staffSocket != null)
+        if (_staffTemplate != null && _staffSocket != null)
         {
             GameObject staffObject = Instantiate(_staffTemplate, _staffSocket.transform, true);
 
             staffObject.transform.localPosition = Vector3.zero;
             staffObject.transform.localRotation = Quaternion.identity;
 
-            _staff = staffObject.GetComponent<MagicStaff>();
+            _magicStaff = staffObject.GetComponent<MagicStaff>();
         }
+    }
+
+    public void Attack()
+    {
+        if (_isOnCooldown || _magicStaff == null)
+        {
+            return;
+        }
+
+        _magicStaff.CastSpell();
+    }
+
+    private IEnumerator SpellCoolDown()
+    {
+        _isOnCooldown = true;
+        yield return new WaitForSeconds(_attackCooldown);
+        _isOnCooldown = false;
     }
 }
