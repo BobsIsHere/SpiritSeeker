@@ -5,7 +5,7 @@ using UnityEngine;
 public class BlueSpell : Spell
 {
     [SerializeField]
-    private float freezeDuration = 3.0f;
+    private float _freezeDuration = 3.0f;
 
     protected override void Awake()
     {
@@ -20,7 +20,7 @@ public class BlueSpell : Spell
 
             if(movementBehaviour != null)
             {
-                movementBehaviour.Freeze(freezeDuration);
+                movementBehaviour.Freeze(_freezeDuration);
             }
 
             Destroy(gameObject);

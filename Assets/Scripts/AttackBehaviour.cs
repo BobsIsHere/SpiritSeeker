@@ -38,6 +38,8 @@ public class AttackBehaviour : MonoBehaviour
         }
 
         _magicStaff.CastSpell();
+
+        StartCoroutine(SpellCoolDown());
     }
 
     private IEnumerator SpellCoolDown()

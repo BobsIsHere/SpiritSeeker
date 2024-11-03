@@ -6,25 +6,33 @@ public class Spell : MonoBehaviour
 {
     private const string KILL_METHOD = "Kill";
 
-    [SerializeField]
-    private float spellSpeed = 10.0f;
-
-    [SerializeField]
-    private float spellDuration = 5.0f;
+    protected float _spellSpeed = 10.0f;
+    protected float _spellDuration = 5.0f;
 
     protected virtual void Awake()
     {
-        Invoke(KILL_METHOD, spellDuration);
+        Invoke(KILL_METHOD, _spellDuration);
     }
 
-    protected virtual void Update()
+    private void FixedUpdate()
     {
-        MoveSpell();
+        if (!WallDetection())
+        {
+            transform.position += transform.forward * _spellSpeed * Time.fixedDeltaTime;
+        }
     }
 
-    private void MoveSpell()
+    static readonly string[] RAYCAST_MASK = { "Ground", "StaticLevel" };
+    bool WallDetection()
     {
-        transform.Translate(Vector3.forward * spellSpeed * Time.deltaTime);
+        Ray collisionRay = new Ray(transform.position, transform.forward);
+        if (Physics.Raycast(collisionRay, Time.deltaTime * _spellSpeed, LayerMask.GetMask(RAYCAST_MASK)))
+        {
+            Kill();
+            return true;
+        }
+
+        return false;
     }
 
     private void Kill()

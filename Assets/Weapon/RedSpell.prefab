@@ -45,9 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54ec6149a8d3eb84c80926c2ca971c72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellSpeed: 10
-  spellDuration: 5
-  pushForce: 10
+  pushForce: 500
 --- !u!1 &6255250799256973880
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,6 +192,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54ec6149a8d3eb84c80926c2ca971c72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellSpeed: 10
-  spellDuration: 5
   pushForce: 10

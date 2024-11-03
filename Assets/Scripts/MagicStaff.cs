@@ -5,13 +5,15 @@ using UnityEngine;
 public class MagicStaff : MonoBehaviour
 {
     [SerializeField]
-    private List<Spell> _spellPrefabs = new List<Spell>();
+    private List<GameObject> _spellPrefabs = new List<GameObject>();
 
-    private Spell _currentSpell = null;
-    private int _currentSpellIndex = 0;
+    private GameObject _currentSpell = null;
+    private int _currentSpellIndex;
 
     private void Start()
     {
+        _currentSpellIndex = 0;
+
         if (_spellPrefabs.Count > 0)
         {
             _currentSpell = _spellPrefabs[_currentSpellIndex];
@@ -32,7 +34,7 @@ public class MagicStaff : MonoBehaviour
         _currentSpell = _spellPrefabs[_currentSpellIndex];
 
         //Print out spell name
-        Debug.Log("Current spell: " + _currentSpell.name);
+        Debug.Log("Current spell: " + _currentSpell);
     }
 
     public void CastSpell()
@@ -43,7 +45,9 @@ public class MagicStaff : MonoBehaviour
         }
 
         // Instantiate & cast current spell
-        Spell spellInstance = Instantiate(_currentSpell, transform.position, transform.rotation);
-        spellInstance.transform.forward = transform.forward;
+        GameObject spellInstance = Instantiate(_currentSpell, transform.position, transform.rotation);
+
+        Vector3 forward = transform.forward;
+        spellInstance.transform.forward = forward;
     }
 }
