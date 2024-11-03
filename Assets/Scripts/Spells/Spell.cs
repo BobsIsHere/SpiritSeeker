@@ -26,7 +26,7 @@ public class Spell : MonoBehaviour
     bool WallDetection()
     {
         Ray collisionRay = new Ray(transform.position, transform.forward);
-        if (Physics.Raycast(collisionRay, Time.deltaTime * _spellSpeed, LayerMask.GetMask(RAYCAST_MASK)))
+        if (Physics.Raycast(collisionRay, Time.fixedDeltaTime * _spellSpeed, LayerMask.GetMask(RAYCAST_MASK)))
         {
             Kill();
             return true;

@@ -6,6 +6,11 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class NavMeshMovementBehaviour : MovementBehaviour
 {
+    private GameObject _player;
+
+    [SerializeField]
+    private float _chaseRange = 10.0f;
+
     private NavMeshAgent _navMeshAgent;
     private Vector3 _previousTargetPosition = Vector3.zero;
 
@@ -19,12 +24,15 @@ public class NavMeshMovementBehaviour : MovementBehaviour
     private bool _isWandering = false;
     private bool _isPaused = false;
     private bool _isFrozen = false;
+    private bool _isChasing = false;
 
     protected override void Awake()
     {
         base.Awake();
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _navMeshAgent.speed = _movementSpeed;
+
+        _player = GameObject.FindGameObjectWithTag("Player");
 
         StartWandering();
     }
@@ -43,6 +51,30 @@ public class NavMeshMovementBehaviour : MovementBehaviour
             return;
         }
 
+        float distanceToPlayer = Vector3.Distance(transform.position, _player.transform.position);
+
+        if (distanceToPlayer <= _chaseRange)
+        {
+            if (!_isChasing)
+            {
+                StartChasing();
+            }
+
+            ChasePlayer();
+        }
+        else
+        {
+            if (_isChasing)
+            {
+                StopChasing();
+            }
+
+            HandleWandering();
+        }
+    }
+
+    private void HandleWandering()
+    {
         if (_isWandering)
         {
             _wanderTimer += Time.fixedDeltaTime;
@@ -70,6 +102,7 @@ public class NavMeshMovementBehaviour : MovementBehaviour
     {
         _isWandering = true;
         _isPaused = false;
+        _isChasing = false;
         _wanderTimer = 0.0f;
         SetNewWanderTarget();
     }
@@ -110,5 +143,27 @@ public class NavMeshMovementBehaviour : MovementBehaviour
     {
         _isFrozen = false;
         _navMeshAgent.isStopped = false;
+    }
+
+    private void StartChasing()
+    {
+        _isChasing = true;
+        _isWandering = false;
+        _isPaused = false;
+        _navMeshAgent.isStopped = false;
+    }
+
+    private void StopChasing()
+    {
+        _isChasing = false;
+        StartWandering();
+    }
+
+    private void ChasePlayer()
+    {
+        if (_player != null)
+        {
+            _navMeshAgent.SetDestination(_player.transform.position);
+        }
     }
 }

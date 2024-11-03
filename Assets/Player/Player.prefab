@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1418541670507965501}
   - component: {fileID: 4017478297093065951}
   - component: {fileID: 2968618326142415164}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: StaffSocket
   m_TagString: Untagged
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 9122870878096397469}
   - component: {fileID: 9183268958708744377}
   - component: {fileID: 596312664769683092}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -327,7 +327,7 @@ GameObject:
   - component: {fileID: 899316762661568621}
   - component: {fileID: 7013048596338199095}
   - component: {fileID: 9078018151040369299}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Visuals
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -413,7 +413,7 @@ GameObject:
   - component: {fileID: 1601166730408861080}
   - component: {fileID: 4883210355956241606}
   - component: {fileID: 1427427342559395622}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}

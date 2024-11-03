@@ -104,11 +104,13 @@ public class PlayerCharacter : BasicCharacter
 
         if (_castSpellAction.action.triggered)
         {
+            Debug.Log("Casting spell");
             _attackBehaviour.Attack();
         }
 
         if (_switchSpellAction.action.triggered)
         {
+            Debug.Log("Switching spell");
             _magicStaff.SwitchSpell();
         }
     }
