@@ -184,10 +184,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spellPrefabs:
-  - {fileID: 3127424249946684174, guid: 93f491e11fc6d03419e09c790b190fc8, type: 3}
-  - {fileID: 3127424249946684174, guid: 748858eaa0f3f3645a3ffaa33b38fd19, type: 3}
-  _spellRed: {fileID: 3127424249946684174, guid: 748858eaa0f3f3645a3ffaa33b38fd19, type: 3}
-  _spellBlue: {fileID: 3127424249946684174, guid: 93f491e11fc6d03419e09c790b190fc8, type: 3}
+  - {fileID: 3758391529407801453, guid: 93f491e11fc6d03419e09c790b190fc8, type: 3}
+  - {fileID: 3143068666312933309, guid: 748858eaa0f3f3645a3ffaa33b38fd19, type: 3}
 --- !u!1 &8413560453847449932
 GameObject:
   m_ObjectHideFlags: 0
