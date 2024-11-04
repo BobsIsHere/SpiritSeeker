@@ -47,7 +47,7 @@ public class MagicStaff : MonoBehaviour
         // Instantiate & cast current spell
         GameObject spellInstance = Instantiate(_currentSpell, transform.position, transform.rotation);
 
-        Vector3 forward = transform.forward;
-        spellInstance.transform.forward = forward;
+        //Vector3 forward = transform.forward;
+        //spellInstance.transform.forward = forward;
     }
 }

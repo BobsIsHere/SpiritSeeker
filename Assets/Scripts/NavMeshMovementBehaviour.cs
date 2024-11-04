@@ -9,7 +9,7 @@ public class NavMeshMovementBehaviour : MovementBehaviour
     private GameObject _player;
 
     [SerializeField]
-    private float _chaseRange = 10.0f;
+    private float _chaseRange = 5.0f;
 
     private NavMeshAgent _navMeshAgent;
     private Vector3 _previousTargetPosition = Vector3.zero;

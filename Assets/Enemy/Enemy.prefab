@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movementSpeed: 5
-  _chaseRange: 10
+  _chaseRange: 5
 --- !u!1001 &1247908630285613148
 PrefabInstance:
   m_ObjectHideFlags: 0

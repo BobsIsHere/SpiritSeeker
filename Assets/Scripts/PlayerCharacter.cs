@@ -20,11 +20,6 @@ public class PlayerCharacter : BasicCharacter
     [SerializeField]
     private InputActionReference _hideAction;
 
-    // TODO: Only AttackBehaviour has a staff.
-    // 2 staffs break your shit dumbass
-    //[SerializeField]
-    //private MagicStaff _magicStaff;
-
     private Health _playerHealth;
 
     private Rigidbody _rigidbody;

@@ -6,7 +6,7 @@ public class Spell : MonoBehaviour
 {
     private const string KILL_METHOD = "Kill";
 
-    protected float _spellSpeed = 10.0f;
+    protected float _spellSpeed = 20.0f;
     protected float _spellDuration = 5.0f;
 
     protected virtual void Awake()
