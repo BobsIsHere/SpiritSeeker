@@ -14,7 +14,7 @@ public class Spell : MonoBehaviour
         Invoke(KILL_METHOD, _spellDuration);
     }
 
-    private void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         if (!WallDetection())
         {
