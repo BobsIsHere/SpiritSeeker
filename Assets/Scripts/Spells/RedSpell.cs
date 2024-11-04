@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine;
 public class RedSpell : Spell
 {
     [SerializeField]
-    private float _pushForce = 100.0f;
+    private float _pushForce = 1500.0f;
 
     protected override void Awake()
     {
@@ -20,12 +21,18 @@ public class RedSpell : Spell
 
             if (enemyRigidBody != null)
             {
-                Vector3 pushDirection = (other.transform.position - transform.position);
-                pushDirection.Normalize();
-                enemyRigidBody.AddForce(pushDirection * _pushForce);
+                Push(enemyRigidBody);
             }
 
             Destroy(gameObject);
         }
+    }
+
+    void Push(Rigidbody enemyRigidBody)
+    {
+        Vector3 pushDirection = (enemyRigidBody.transform.position - transform.position);
+        pushDirection.Normalize();
+        pushDirection.y = 0.0f;
+        enemyRigidBody.AddForce(pushDirection * _pushForce, ForceMode.Impulse);
     }
 }

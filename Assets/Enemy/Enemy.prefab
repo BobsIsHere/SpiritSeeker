@@ -67,8 +67,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1660613101060691441}
   serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
+  m_Mass: 10
+  m_Drag: 5
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -121,7 +121,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movementSpeed: 5
-  _player: {fileID: 1572282508309692367, guid: e0f4621ba6ede724cb374d06a440945a, type: 3}
   _chaseRange: 10
 --- !u!1001 &1247908630285613148
 PrefabInstance:

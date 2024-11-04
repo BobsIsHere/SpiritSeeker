@@ -274,6 +274,7 @@ MonoBehaviour:
   _movementAction: {fileID: -3014673209884182142, guid: e590367cf4825954285cd6c3e148c17f, type: 3}
   _castSpellAction: {fileID: 716458629883691891, guid: e590367cf4825954285cd6c3e148c17f, type: 3}
   _switchSpellAction: {fileID: -8884784220405076089, guid: e590367cf4825954285cd6c3e148c17f, type: 3}
+  _hideAction: {fileID: -2319618998412349205, guid: e590367cf4825954285cd6c3e148c17f, type: 3}
   _magicStaff: {fileID: -4569633503607445415, guid: 07c5d2cbe42cae745bac42ce81b35857, type: 3}
 --- !u!114 &9122870878096397469
 MonoBehaviour:

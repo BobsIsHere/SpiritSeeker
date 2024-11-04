@@ -48,4 +48,9 @@ public class AttackBehaviour : MonoBehaviour
         yield return new WaitForSeconds(_attackCooldown);
         _isOnCooldown = false;
     }
+
+    public MagicStaff GetMagicStaff()
+    {
+        return _magicStaff;
+    }
 }

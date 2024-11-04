@@ -18,17 +18,25 @@ public class PlayerCharacter : BasicCharacter
     private InputActionReference _switchSpellAction;
 
     [SerializeField]
-    private MagicStaff _magicStaff;
+    private InputActionReference _hideAction;
+
+    // TODO: Only AttackBehaviour has a staff.
+    // 2 staffs break your shit dumbass
+    //[SerializeField]
+    //private MagicStaff _magicStaff;
 
     private Health _playerHealth;
 
     private Rigidbody _rigidbody;
 
+    private bool _isHiding = false;
+
     private const float _coolDownTimer = 0.5f;
     private float _currentCoolDownTimer = 0.0f;
 
-    const string SPIRIT_TAG = "Spirit";
-    const string ENEMY_TAG = "Enemy";
+    private const string SPIRIT_TAG = "Spirit";
+    private const string ENEMY_TAG = "Enemy";
+    private const string COVER_TAG = "Cover";
 
     protected override void Awake()
     {
@@ -78,6 +86,7 @@ public class PlayerCharacter : BasicCharacter
     {
         HandleMovementInput();
         HandleSpellInput();
+        HandleHideInput();
 
         _currentCoolDownTimer += Time.deltaTime;
     }
@@ -89,15 +98,18 @@ public class PlayerCharacter : BasicCharacter
             return;
         }
 
-        //movement
-        Vector2 movementInput = _movementAction.action.ReadValue<Vector2>();
-        Vector3 movement = new Vector3(movementInput.x, 0, movementInput.y);
-        _movementBehaviour.DesiredMovementDirection = movement;
+        if (!_isHiding)
+        {
+            //movement
+            Vector2 movementInput = _movementAction.action.ReadValue<Vector2>();
+            Vector3 movement = new Vector3(movementInput.x, 0, movementInput.y);
+            _movementBehaviour.DesiredMovementDirection = movement;
+        }
     }
 
     void HandleSpellInput()
     {
-        if (_magicStaff == null && _attackBehaviour == null)
+        if (_attackBehaviour.GetMagicStaff() == null && _attackBehaviour == null)
         {
             return;
         }
@@ -111,7 +123,15 @@ public class PlayerCharacter : BasicCharacter
         if (_switchSpellAction.action.triggered)
         {
             Debug.Log("Switching spell");
-            _magicStaff.SwitchSpell();
+            _attackBehaviour.GetMagicStaff().SwitchSpell();
+        }
+    }
+
+    void HandleHideInput()
+    {
+        if (_hideAction.action.triggered && IsNearCover())
+        {
+            ToggleHide();
         }
     }
 
@@ -143,6 +163,42 @@ public class PlayerCharacter : BasicCharacter
         if (respawnPoint != null)
         {
             _rigidbody.MovePosition(respawnPoint.transform.position);
+        }
+    }
+
+    private bool IsNearCover()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 1.0f);
+
+        foreach (Collider collider in colliders)
+        {
+            if (collider.tag == COVER_TAG)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private void ToggleHide()
+    {
+        _isHiding = !_isHiding;
+        gameObject.SetActive(!_isHiding);
+
+        if (_isHiding)
+        {
+            // Disable all player actions
+            _movementBehaviour.enabled = false;
+
+            // disable magic
+        }
+        else
+        {
+            // Enable all player actions
+            _movementBehaviour.enabled = true;
+
+            // enable magic
         }
     }
 }
