@@ -26,6 +26,8 @@ public class NavMeshMovementBehaviour : MovementBehaviour
     private bool _isFrozen = false;
     private bool _isChasing = false;
 
+    private PlayerCharacter _playerScript;
+
     protected override void Awake()
     {
         base.Awake();
@@ -33,6 +35,11 @@ public class NavMeshMovementBehaviour : MovementBehaviour
         _navMeshAgent.speed = _movementSpeed;
 
         _player = GameObject.FindGameObjectWithTag("Player");
+
+        if (_player != null)
+        {
+            _playerScript = _player.GetComponent<PlayerCharacter>();
+        }
 
         StartWandering();
     }
@@ -53,7 +60,8 @@ public class NavMeshMovementBehaviour : MovementBehaviour
 
         float distanceToPlayer = Vector3.Distance(transform.position, _player.transform.position);
 
-        if (distanceToPlayer <= _chaseRange)
+        // MATT: If player is not hiding and is within chase range, start chasing
+        if (distanceToPlayer <= _chaseRange && !_playerScript.IsHiding())
         {
             if (!_isChasing)
             {

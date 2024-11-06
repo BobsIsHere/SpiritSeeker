@@ -22,16 +22,19 @@ public class PlayerCharacter : BasicCharacter
 
     private Health _playerHealth;
 
-    private Rigidbody _rigidbody;
+    private Rigidbody _rigidbody; 
 
     private bool _isHiding = false;
 
-    private const float _coolDownTimer = 0.5f;
+    private const float COOLDOWN_TIMER = 0.5f;
     private float _currentCoolDownTimer = 0.0f;
 
     private const string SPIRIT_TAG = "Spirit";
     private const string ENEMY_TAG = "Enemy";
     private const string COVER_TAG = "Cover";
+
+    private const float COVER_RADIUS = 5.0f;
+    private const float HIDE_DURATION = 5.0f;
 
     protected override void Awake()
     {
@@ -43,14 +46,12 @@ public class PlayerCharacter : BasicCharacter
         }
 
         _playerHealth = GetComponent<Health>();
-
         if (_playerHealth == null)
         {
             return;
         }
 
         _rigidbody = GetComponent<Rigidbody>();
-
         if (_rigidbody == null)
         {
             return;
@@ -79,8 +80,12 @@ public class PlayerCharacter : BasicCharacter
 
     private void Update()
     {
-        HandleMovementInput();
-        HandleSpellInput();
+        if (!_isHiding)
+        {
+            HandleMovementInput();
+            HandleSpellInput();
+        }
+
         HandleHideInput();
 
         _currentCoolDownTimer += Time.deltaTime;
@@ -93,13 +98,10 @@ public class PlayerCharacter : BasicCharacter
             return;
         }
 
-        if (!_isHiding)
-        {
-            //movement
-            Vector2 movementInput = _movementAction.action.ReadValue<Vector2>();
-            Vector3 movement = new Vector3(movementInput.x, 0, movementInput.y);
-            _movementBehaviour.DesiredMovementDirection = movement;
-        }
+        //movement
+        Vector2 movementInput = _movementAction.action.ReadValue<Vector2>();
+        Vector3 movement = new Vector3(movementInput.x, 0, movementInput.y);
+        _movementBehaviour.DesiredMovementDirection = movement;
     }
 
     void HandleSpellInput()
@@ -127,6 +129,7 @@ public class PlayerCharacter : BasicCharacter
         if (_hideAction.action.triggered && IsNearCover())
         {
             ToggleHide();
+            //StartCoroutine(HideDuration());
         }
     }
 
@@ -141,7 +144,10 @@ public class PlayerCharacter : BasicCharacter
         }
         else if (other.tag == ENEMY_TAG)
         {
-            if (_currentCoolDownTimer >= _coolDownTimer)
+            if (_isHiding)
+                return;
+
+            if (_currentCoolDownTimer >= COOLDOWN_TIMER)
             {
                 _currentCoolDownTimer = 0.0f;
 
@@ -163,37 +169,64 @@ public class PlayerCharacter : BasicCharacter
 
     private bool IsNearCover()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, 1.0f);
-
-        foreach (Collider collider in colliders)
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, COVER_RADIUS);
+        foreach (Collider collider in hitColliders)
         {
-            if (collider.tag == COVER_TAG)
+            Debug.Log("Detected object: " + collider.gameObject.name + " with tag: " + collider.tag);
+            if (collider.CompareTag(COVER_TAG))
             {
+                Debug.Log("Cover object detected: " + collider.gameObject.name);
                 return true;
             }
         }
-
         return false;
     }
 
     private void ToggleHide()
     {
+        _movementBehaviour.DesiredMovementDirection = new Vector3(0, 0, 0);
+
+        GetComponent<Collider>().enabled = _isHiding;
+
+        Transform visuals = transform.Find("Visuals");
+        if (visuals != null) 
+        {
+            ToggleMeshRenderers(visuals);
+        }
+
+        // Switch hiding state
         _isHiding = !_isHiding;
-        gameObject.SetActive(!_isHiding);
+    }
+
+    private void ToggleMeshRenderers(Transform parent)
+    {
+        // Disable mesh renderer if it exist
+        MeshRenderer meshRenderer = parent.GetComponent<MeshRenderer>();
+        if (meshRenderer != null)
+        {
+            meshRenderer.enabled = _isHiding;
+        }
+
+        // Iterate through its children
+        foreach (Transform child in parent)
+        {
+            // Recursively toggle mesh renderers
+            ToggleMeshRenderers(child);
+        }
+    }
+
+    private IEnumerator HideDuration()
+    {
+        yield return new WaitForSeconds(HIDE_DURATION);
 
         if (_isHiding)
         {
-            // Disable all player actions
-            _movementBehaviour.enabled = false;
-
-            // disable magic
+            ToggleHide();
         }
-        else
-        {
-            // Enable all player actions
-            _movementBehaviour.enabled = true;
+    }
 
-            // enable magic
-        }
+    public bool IsHiding()
+    {
+        return _isHiding;
     }
 }
