@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BlueSpell : Spell
 {
@@ -23,7 +24,7 @@ public class BlueSpell : Spell
                 movementBehaviour.Freeze(_freezeDuration);
             }
 
-            Destroy(gameObject);
+            Kill();
         }
     }
 }

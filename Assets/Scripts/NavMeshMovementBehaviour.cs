@@ -60,7 +60,7 @@ public class NavMeshMovementBehaviour : MovementBehaviour
 
         float distanceToPlayer = Vector3.Distance(transform.position, _player.transform.position);
 
-        // MATT: If player is not hiding and is within chase range, start chasing
+        // If player is not hiding and is within chase range, start chasing
         if (distanceToPlayer <= _chaseRange && !_playerScript.IsHiding())
         {
             if (!_isChasing)
