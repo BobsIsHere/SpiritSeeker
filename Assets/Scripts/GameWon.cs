@@ -24,7 +24,7 @@ public class GameWon : MonoBehaviour
     private void OnGameWon()
     {
         Debug.Log("Game Won");
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("SpiritSeeker");
     }
 
     private bool AllSpiritsCollected()

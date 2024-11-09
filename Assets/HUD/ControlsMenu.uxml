@@ -1,0 +1,5 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="Container" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Textures/Controls.png?fileID=2800000&amp;guid=0588b00810a921b4fb771243a3263c97&amp;type=3#Controls&quot;);">
+        <ui:Button text="Go Back" parse-escape-sequences="true" display-tooltip-when-elided="true" name="GoBackButton" style="align-self: flex-start; margin-top: 10px; margin-left: 10px; width: 100px;" />
+    </ui:VisualElement>
+</ui:UXML>
