@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class PlayerCharacter : BasicCharacter
@@ -19,6 +20,9 @@ public class PlayerCharacter : BasicCharacter
 
     [SerializeField]
     private InputActionReference _hideAction;
+
+    [SerializeField]
+    private UnityEvent _onDamageEvent;
 
     private Health _playerHealth;
 
@@ -129,7 +133,6 @@ public class PlayerCharacter : BasicCharacter
         if (_hideAction.action.triggered && IsNearCover())
         {
             ToggleHide();
-            //StartCoroutine(HideDuration());
         }
     }
 
@@ -152,6 +155,7 @@ public class PlayerCharacter : BasicCharacter
                 _currentCoolDownTimer = 0.0f;
 
                 ResetPosition();
+                _onDamageEvent?.Invoke();
                 _playerHealth.TakeDamage(1);
             }
         }

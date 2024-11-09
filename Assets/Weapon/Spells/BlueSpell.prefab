@@ -58,7 +58,7 @@ PrefabInstance:
       objectReference: {fileID: 8926484042661614526, guid: fc0e740996fcc2b4ca78d2b379bb1388, type: 3}
     - target: {fileID: 3158962392160841068, guid: 227a85b3540828141a0d338d9a9baf0b, type: 3}
       propertyPath: m_InitialEventNameOverriden
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4625083303771376098, guid: 227a85b3540828141a0d338d9a9baf0b, type: 3}
       propertyPath: m_Name
