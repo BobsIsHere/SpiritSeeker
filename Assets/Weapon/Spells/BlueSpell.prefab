@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -3583580502907089464, guid: 227a85b3540828141a0d338d9a9baf0b, type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 99502937838323030, guid: 227a85b3540828141a0d338d9a9baf0b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -46,6 +50,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 99502937838323030, guid: 227a85b3540828141a0d338d9a9baf0b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3158962392160841068, guid: 227a85b3540828141a0d338d9a9baf0b, type: 3}
+      propertyPath: m_Asset
+      value: 
+      objectReference: {fileID: 8926484042661614526, guid: fc0e740996fcc2b4ca78d2b379bb1388, type: 3}
+    - target: {fileID: 3158962392160841068, guid: 227a85b3540828141a0d338d9a9baf0b, type: 3}
+      propertyPath: m_InitialEventNameOverriden
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4625083303771376098, guid: 227a85b3540828141a0d338d9a9baf0b, type: 3}
