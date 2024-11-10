@@ -1,3 +1,4 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <ui:ProgressBar value="22" title="my-progress" name="LivesBar" style="width: 20%; height: 0; align-self: flex-end;" />
+    <ui:ProgressBar value="22" title="my-progress" name="MagicCoolDownBar" style="align-self: flex-end; width: 20%; height: 0; align-items: stretch; margin-top: 30px;" />
 </ui:UXML>

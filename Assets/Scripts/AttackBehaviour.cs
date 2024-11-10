@@ -17,6 +17,19 @@ public class AttackBehaviour : MonoBehaviour
     private MagicStaff _magicStaff;
     private bool _isOnCooldown = false;
 
+    public bool IsOnCooldown
+    {
+        get { return _isOnCooldown; }
+    }
+
+    public float AttackCooldown
+    {
+        get { return _attackCooldown; }
+    }
+
+    public delegate void SpellCastDelegate(float coolDownDuration);
+    public event SpellCastDelegate OnSpellCast;
+
     private void Awake()
     {
         if (_staffTemplate != null && _staffSocket != null)
@@ -38,6 +51,8 @@ public class AttackBehaviour : MonoBehaviour
         }
 
         _magicStaff.CastSpell();
+
+        OnSpellCast?.Invoke(_attackCooldown);
 
         StartCoroutine(SpellCoolDown());
     }
