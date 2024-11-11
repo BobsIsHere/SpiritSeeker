@@ -5,11 +5,15 @@ using UnityEngine;
 public class MovementBehaviour : MonoBehaviour
 {
     [SerializeField]
+    protected GameObject _glowStickSocket;
+
+    [SerializeField]
     protected float _movementSpeed = 1.0f;
 
     protected Rigidbody _rigidBody;
 
     protected Vector3 _desiredMovementDirection = Vector3.zero;
+    protected Vector3 _desiredLookatPoint = Vector3.zero;
     protected GameObject _target;
 
     protected bool _grounded = false;
@@ -23,9 +27,20 @@ public class MovementBehaviour : MonoBehaviour
         set { _desiredMovementDirection = value; }
     }
 
+    public Vector3 DesiredLookatPoint
+    {
+        get { return _desiredLookatPoint; }
+        set { _desiredLookatPoint = value; }
+    }
+
     protected virtual void Awake()
     {
         _rigidBody = GetComponent<Rigidbody>();
+    }
+
+    protected virtual void Update()
+    {
+        HandleLookat();
     }
 
     protected virtual void FixedUpdate()
@@ -47,5 +62,14 @@ public class MovementBehaviour : MonoBehaviour
         //maintain vertical velocity as it was otherwise gravity would be stripped out
         movement.y = _rigidBody.velocity.y;
         _rigidBody.velocity = movement;
+    }
+
+    protected virtual void HandleLookat()
+    {
+        if (_glowStickSocket == null)
+        {
+            return;
+        }
+        _glowStickSocket.transform.LookAt(_desiredLookatPoint);
     }
 }

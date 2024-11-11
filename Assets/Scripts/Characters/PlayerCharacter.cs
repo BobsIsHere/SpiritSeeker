@@ -22,13 +22,25 @@ public class PlayerCharacter : BasicCharacter
     private InputActionReference _hideAction;
 
     [SerializeField]
+    private InputActionReference _throwAction;
+
+    [SerializeField]
     private UnityEvent _onDamageEvent;
+
+    [SerializeField]
+    private GameObject _glowstickPrefab;
+
+    [SerializeField]
+    private Transform _glowStickSocket; 
 
     private Health _playerHealth;
 
-    private Rigidbody _rigidbody; 
+    private Rigidbody _rigidbody;
 
     private bool _isHiding = false;
+
+    private const int MAX_GLOWSTICKS = 3;
+    private int _currentGlowsticks = MAX_GLOWSTICKS;
 
     private const float COOLDOWN_TIMER = 0.5f;
     private float _currentCoolDownTimer = 0.0f;
@@ -87,7 +99,9 @@ public class PlayerCharacter : BasicCharacter
         if (!_isHiding)
         {
             HandleMovementInput();
+            HandleAimingInput();
             HandleSpellInput();
+            HandleGlowStickInput();
         }
 
         HandleHideInput();
@@ -106,6 +120,16 @@ public class PlayerCharacter : BasicCharacter
         Vector2 movementInput = _movementAction.action.ReadValue<Vector2>();
         Vector3 movement = new Vector3(movementInput.x, 0, movementInput.y);
         _movementBehaviour.DesiredMovementDirection = movement;
+    }
+
+    private void HandleAimingInput()
+    {
+        Vector3 mousePosition = Mouse.current.position.ReadValue();
+        mousePosition.z = Mathf.Abs(transform.position.z - Camera.main.transform.position.z);
+
+        Vector3 worldMousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
+        worldMousePosition.y = 0;
+        _movementBehaviour.DesiredLookatPoint = worldMousePosition;
     }
 
     void HandleSpellInput()
@@ -133,6 +157,14 @@ public class PlayerCharacter : BasicCharacter
         if (_hideAction.action.triggered && IsNearCover())
         {
             ToggleHide();
+        }
+    }
+
+    void HandleGlowStickInput()
+    {
+        if (_throwAction.action.triggered && _currentGlowsticks > 0)
+        {
+            ThrowGlowStick();
         }
     }
 
@@ -193,7 +225,7 @@ public class PlayerCharacter : BasicCharacter
         GetComponent<Collider>().enabled = _isHiding;
 
         Transform visuals = transform.Find("Visuals");
-        if (visuals != null) 
+        if (visuals != null)
         {
             ToggleMeshRenderers(visuals);
         }
@@ -232,5 +264,44 @@ public class PlayerCharacter : BasicCharacter
     public bool IsHiding()
     {
         return _isHiding;
+    }
+
+    private void ThrowGlowStick()
+    {
+        // Calculate mouse position in world space
+        Vector3 mousePosition = Mouse.current.position.ReadValue();
+        mousePosition.z = Mathf.Abs(transform.position.z - Camera.main.transform.position.z);
+
+        Vector3 worldMousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
+        // Ensure it's on the same level as the player
+        worldMousePosition.y = _glowStickSocket.position.y;
+
+        // Calculate direction from player to mouse position
+        Vector3 direction = (worldMousePosition - _glowStickSocket.position).normalized;
+
+        // Instantiate glowstick
+        GameObject glowstick = Instantiate(_glowstickPrefab, _glowStickSocket.position, Quaternion.identity);
+
+        GlowStick glowStickComponent = glowstick.GetComponent<GlowStick>();
+        if (glowStickComponent != null)
+        {
+            const float upwardForce = 25.0f;
+
+            glowStickComponent.SetDirection(direction);
+            glowstick.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0.0f, upwardForce, 0.0f));
+        }
+
+        // Reduce glowstick count
+        --_currentGlowsticks;
+    }
+
+    private IEnumerator DestroyGlowStick(GameObject glowStick, float duration)
+    {
+        yield return new WaitForSeconds(duration);
+
+        if (glowStick != null)
+        {
+            Destroy(glowStick);
+        }
     }
 }

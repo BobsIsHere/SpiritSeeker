@@ -72,7 +72,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 712549627659450370}
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &4017478297093065951
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -178,6 +178,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 899316762661568621}
+  - {fileID: 6433308193226404746}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &2012191572323568352
@@ -309,6 +310,7 @@ MonoBehaviour:
   _castSpellAction: {fileID: 716458629883691891, guid: e590367cf4825954285cd6c3e148c17f, type: 3}
   _switchSpellAction: {fileID: -8884784220405076089, guid: e590367cf4825954285cd6c3e148c17f, type: 3}
   _hideAction: {fileID: -2319618998412349205, guid: e590367cf4825954285cd6c3e148c17f, type: 3}
+  _throwAction: {fileID: -332524426564034484, guid: e590367cf4825954285cd6c3e148c17f, type: 3}
   _onDamageEvent:
     m_PersistentCalls:
       m_Calls:
@@ -324,6 +326,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _glowstickPrefab: {fileID: 7570987757590007122, guid: 9f79beb271c588f459dcd0d5a6ce4e8b, type: 3}
+  _glowStickSocket: {fileID: 6433308193226404746}
 --- !u!114 &9122870878096397469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,6 +340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb8bd1287f079d74ba50cc177ea1906a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _glowStickSocket: {fileID: 1689605422885510071}
   _movementSpeed: 10
 --- !u!114 &9183268958708744377
 MonoBehaviour:
@@ -580,6 +585,37 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &1689605422885510071
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6433308193226404746}
+  m_Layer: 0
+  m_Name: GlowStaffSocket
+  m_TagString: Untagged
+  m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6433308193226404746
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1689605422885510071}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1.283}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6496595492252507628}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6494520288795630938
 GameObject:
   m_ObjectHideFlags: 0
@@ -623,7 +659,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6494520288795630938}
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &9078018151040369299
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -707,7 +743,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6842888919777297643}
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &4883210355956241606
 MeshRenderer:
   m_ObjectHideFlags: 0
