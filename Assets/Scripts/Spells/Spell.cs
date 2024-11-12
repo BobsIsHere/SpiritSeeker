@@ -10,6 +10,7 @@ public class Spell : MonoBehaviour
     private const string KILL_METHOD = "Kill";
 
     private float _lifeTime;
+    private Vector3 _spellDirection;
     protected float _spellSpeed = 20.0f;
     protected float _spellDuration = 5.0f;
 
@@ -22,10 +23,15 @@ public class Spell : MonoBehaviour
     {
         if (!WallDetection())
         {
-            transform.position += transform.forward * _spellSpeed * Time.fixedDeltaTime;
+            transform.position += _spellDirection * _spellSpeed * Time.fixedDeltaTime;
         }
 
         _lifeTime += Time.fixedDeltaTime;
+    }
+
+    public void SetDirection(Vector3 direction)
+    {
+        _spellDirection = direction;
     }
 
     static readonly string[] RAYCAST_MASK = { "Ground", "StaticLevel" };

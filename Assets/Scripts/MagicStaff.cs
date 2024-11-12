@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MagicStaff : MonoBehaviour
 {
@@ -44,7 +45,27 @@ public class MagicStaff : MonoBehaviour
             return;
         }
 
-        // Instantiate & cast current spell
-        GameObject spellInstance = Instantiate(_currentSpell, transform.position, transform.rotation);
+        // Get mouse psotion in world space
+        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+        RaycastHit hit;
+        Vector3 worldMousePosition = Vector3.zero;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            worldMousePosition = hit.point;
+
+            Vector3 direction = (worldMousePosition - transform.position).normalized;
+            direction.y = 0;
+
+            // Instantiate & cast current spell
+            GameObject spellInstance = Instantiate(_currentSpell, transform.position, transform.rotation);
+
+            // Set direction of spell
+            Spell spellComponent = spellInstance.GetComponent<Spell>();
+            if (spellComponent != null)
+            {
+                spellComponent.SetDirection(direction);
+            }
+        }
     }
 }
