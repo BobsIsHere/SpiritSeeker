@@ -52,10 +52,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: YellowSpell
       objectReference: {fileID: 0}
+    - target: {fileID: 5165386560032676411, guid: 227a85b3540828141a0d338d9a9baf0b, type: 3}
+      propertyPath: m_Asset
+      value: 
+      objectReference: {fileID: 8926484042661614526, guid: 2355e57eeb41d5b479b2d5a165190f4b, type: 3}
     - target: {fileID: 7070010618587898594, guid: 227a85b3540828141a0d338d9a9baf0b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 196f5ccf82874d9479f55809f5823dd9, type: 2}
+    - target: {fileID: 8985491481609473167, guid: 227a85b3540828141a0d338d9a9baf0b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -69,6 +77,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4625083303771376098, guid: 227a85b3540828141a0d338d9a9baf0b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5924099325652338663}
+    - targetCorrespondingSourceObject: {fileID: 4625083303771376098, guid: 227a85b3540828141a0d338d9a9baf0b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -1829526203515023175}
   m_SourcePrefab: {fileID: 100100000, guid: 227a85b3540828141a0d338d9a9baf0b, type: 3}
 --- !u!1 &7947578016965795763 stripped
 GameObject:
@@ -246,3 +257,26 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-1829526203515023175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7947578016965795763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0

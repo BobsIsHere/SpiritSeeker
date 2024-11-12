@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RedSpell
       objectReference: {fileID: 0}
+    - target: {fileID: 5165386560032676411, guid: 227a85b3540828141a0d338d9a9baf0b, type: 3}
+      propertyPath: m_Asset
+      value: 
+      objectReference: {fileID: 8926484042661614526, guid: 29b01099491aa344496d3f3189fd7516, type: 3}
     - target: {fileID: 7070010618587898594, guid: 227a85b3540828141a0d338d9a9baf0b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
