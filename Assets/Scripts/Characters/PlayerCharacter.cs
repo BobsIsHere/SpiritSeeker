@@ -124,12 +124,14 @@ public class PlayerCharacter : BasicCharacter
 
     private void HandleAimingInput()
     {
-        Vector3 mousePosition = Mouse.current.position.ReadValue();
-        mousePosition.z = Mathf.Abs(transform.position.z - Camera.main.transform.position.z);
-
-        Vector3 worldMousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
-        worldMousePosition.y = 0;
-        _movementBehaviour.DesiredLookatPoint = worldMousePosition;
+        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Ground")))
+        {
+            Vector3 worldMousePosition = hit.point;
+            worldMousePosition.y = 0;
+            _movementBehaviour.DesiredLookatPoint = worldMousePosition;
+        }
     }
 
     void HandleSpellInput()
@@ -268,13 +270,15 @@ public class PlayerCharacter : BasicCharacter
 
     private void ThrowGlowStick()
     {
-        // Calculate mouse position in world space
-        Vector3 mousePosition = Mouse.current.position.ReadValue();
-        mousePosition.z = Mathf.Abs(transform.position.z - Camera.main.transform.position.z);
-
-        Vector3 worldMousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
-        // Ensure it's on the same level as the player
-        worldMousePosition.y = _glowStickSocket.position.y;
+        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+        RaycastHit hit;
+        Vector3 worldMousePosition = Vector3.zero;
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Ground")))
+        {
+            worldMousePosition = hit.point;
+            worldMousePosition.y = 0;
+            _movementBehaviour.DesiredLookatPoint = worldMousePosition;
+        }
 
         // Calculate direction from player to mouse position
         Vector3 direction = (worldMousePosition - _glowStickSocket.position).normalized;
