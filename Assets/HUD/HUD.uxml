@@ -1,5 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <ui:ProgressBar value="22" title="my-progress" name="LivesBar" high-value="100" style="width: 20%; height: 0; align-self: flex-end; translate: 0 0; transform-origin: center;" />
+    <ui:Label tabindex="-1" text="LIVES" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Lives" style="align-self: flex-end; height: -31px;" />
+    <ui:ProgressBar value="22" title="my-progress" name="LivesBar" high-value="100" style="width: 20%; height: 0; align-self: flex-end; translate: 0 0; transform-origin: center; margin-top: 4px;" />
     <ui:ProgressBar value="22" title="my-progress" name="MagicCoolDownBar" style="align-self: flex-end; width: 20%; height: 0; align-items: stretch; margin-top: 30px; translate: 0 0;" />
-    <ui:ProgressBar value="22" title="my-progress" name="GlowStickBar" high-value="100" style="align-items: stretch; align-self: flex-start; width: 20%; height: 0; margin-top: 4px; flex-direction: column; flex-wrap: nowrap; justify-content: flex-end;" />
+    <ui:Label tabindex="-1" text="AMOUNT OF STICKS&#10;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="AmountOfSticks" style="-unity-text-align: middle-left; align-self: flex-start; justify-content: flex-start; align-items: stretch; margin-top: 0; height: -30px; width: 150px; top: 0; position: absolute; background-color: rgba(134, 192, 255, 0); -unity-background-image-tint-color: rgb(134, 192, 255);" />
+    <ui:ProgressBar value="22" title="my-progress" name="GlowStickBar" high-value="100" style="align-items: stretch; align-self: flex-start; width: 20%; height: 0; margin-top: 0; flex-direction: column; flex-wrap: nowrap; justify-content: flex-end; position: absolute; top: 60px;" />
 </ui:UXML>
