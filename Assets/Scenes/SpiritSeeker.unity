@@ -612,7 +612,7 @@ GameObject:
   - component: {fileID: 649180693}
   - component: {fileID: 649180692}
   - component: {fileID: 649180691}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SafeGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1561,7 +1561,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &920102926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2318,7 +2318,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 476374, guid: e16a8b85b2dd8644daf07a5680e2093e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -14.64888
+      value: -15.0847645
       objectReference: {fileID: 0}
     - target: {fileID: 476374, guid: e16a8b85b2dd8644daf07a5680e2093e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2348,6 +2348,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2385842, guid: e16a8b85b2dd8644daf07a5680e2093e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d7de3a901d56e024fa618c26f22f3292, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2373,7 +2377,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1157998574
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3670,7 +3674,7 @@ GameObject:
   - component: {fileID: 1414642959}
   - component: {fileID: 1414642958}
   - component: {fileID: 1414642957}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5834,7 +5838,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 416360, guid: 862d80f8d3382224c99a336ed6e421a8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -14.69
+      value: -15.125884
       objectReference: {fileID: 0}
     - target: {fileID: 416360, guid: 862d80f8d3382224c99a336ed6e421a8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5891,7 +5895,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 411296, guid: 6f5b6a0bdb5e02d49a5ce5386e678c1b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -11.214115
+      value: -11.65
       objectReference: {fileID: 0}
     - target: {fileID: 411296, guid: 6f5b6a0bdb5e02d49a5ce5386e678c1b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6214,7 +6218,7 @@ GameObject:
   - component: {fileID: 1701296864}
   - component: {fileID: 1701296863}
   - component: {fileID: 1701296862}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: OutsideGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7178,7 +7182,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 445200, guid: 166addaeafa7048438be83ea2d3749c6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.0811
+      value: -8.14
       objectReference: {fileID: 0}
     - target: {fileID: 445200, guid: 166addaeafa7048438be83ea2d3749c6, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7186,7 +7190,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 445200, guid: 166addaeafa7048438be83ea2d3749c6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -17.00352
+      value: -17.439404
       objectReference: {fileID: 0}
     - target: {fileID: 445200, guid: 166addaeafa7048438be83ea2d3749c6, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7350,7 +7354,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 411296, guid: 6f5b6a0bdb5e02d49a5ce5386e678c1b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -11.257545
+      value: -11.69343
       objectReference: {fileID: 0}
     - target: {fileID: 411296, guid: 6f5b6a0bdb5e02d49a5ce5386e678c1b, type: 3}
       propertyPath: m_LocalRotation.w

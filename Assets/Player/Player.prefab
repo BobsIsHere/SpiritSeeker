@@ -103,7 +103,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 712549627659450370}
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &4017478297093065951
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -357,6 +357,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _onGlowStickCountChanged:
+    m_PersistentCalls:
+      m_Calls: []
   _glowstickPrefab: {fileID: 7570987757590007122, guid: 9f79beb271c588f459dcd0d5a6ce4e8b, type: 3}
   _glowStickSocket: {fileID: 4438681573821219624}
 --- !u!114 &9122870878096397469
@@ -691,7 +694,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6494520288795630938}
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &9078018151040369299
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -775,7 +778,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6842888919777297643}
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &4883210355956241606
 MeshRenderer:
   m_ObjectHideFlags: 0

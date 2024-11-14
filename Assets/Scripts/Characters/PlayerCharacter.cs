@@ -28,6 +28,9 @@ public class PlayerCharacter : BasicCharacter
     private UnityEvent _onDamageEvent;
 
     [SerializeField]
+    public UnityEvent<int> _onGlowStickCountChanged;
+
+    [SerializeField]
     private GameObject _glowstickPrefab;
 
     [SerializeField]
@@ -109,7 +112,7 @@ public class PlayerCharacter : BasicCharacter
         _currentCoolDownTimer += Time.deltaTime;
     }
 
-    void HandleMovementInput()
+    private void HandleMovementInput()
     {
         if (_movementBehaviour == null || _movementAction == null)
         {
@@ -134,7 +137,7 @@ public class PlayerCharacter : BasicCharacter
         }
     }
 
-    void HandleSpellInput()
+    private void HandleSpellInput()
     {
         if (_attackBehaviour.GetMagicStaff() == null && _attackBehaviour == null)
         {
@@ -154,7 +157,7 @@ public class PlayerCharacter : BasicCharacter
         }
     }
 
-    void HandleHideInput()
+    private void HandleHideInput()
     {
         if (_hideAction.action.triggered && IsNearCover())
         {
@@ -162,7 +165,7 @@ public class PlayerCharacter : BasicCharacter
         }
     }
 
-    void HandleGlowStickInput()
+    private void HandleGlowStickInput()
     {
         if (_throwAction.action.triggered && _currentGlowsticks > 0)
         {
@@ -193,6 +196,11 @@ public class PlayerCharacter : BasicCharacter
                 _playerHealth.TakeDamage(1);
             }
         }
+    }
+
+    public int GetCurrentAmountOfGlowSticks()
+    {
+        return _currentGlowsticks;
     }
 
     private void ResetPosition()
@@ -297,6 +305,9 @@ public class PlayerCharacter : BasicCharacter
 
         // Reduce glowstick count
         --_currentGlowsticks;
+
+        //Invoke event to change HUD
+        _onGlowStickCountChanged?.Invoke(_currentGlowsticks);
     }
 
     private IEnumerator DestroyGlowStick(GameObject glowStick, float duration)

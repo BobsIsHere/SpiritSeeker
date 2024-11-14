@@ -9,12 +9,14 @@ public class HUD : MonoBehaviour
     private VisualElement _root = null;
     private ProgressBar _healthbar = null;
     private ProgressBar _coolDownBar = null;
+    private ProgressBar _glowStickBar = null;
 
     private Health _playerHealth;
     private AttackBehaviour _attackBehaviour;
 
-    // Start is called before the first frame update
-    void Start()
+    private const float MAX_PERCENTAGE = 100.0f;
+
+    private void Start()
     {
         //UI
         _attachedDocument = GetComponent<UIDocument>();
@@ -28,6 +30,7 @@ public class HUD : MonoBehaviour
         {
             _healthbar = _root.Q<ProgressBar>("LivesBar");
             _coolDownBar = _root.Q<ProgressBar>("MagicCoolDownBar");
+            _glowStickBar = _root.Q<ProgressBar>("GlowStickBar");
 
             // Initialze cooldown bar value & text
             if (_coolDownBar != null)
@@ -60,20 +63,21 @@ public class HUD : MonoBehaviour
                 {
                     _attackBehaviour.OnSpellCast += StartCoolDownBar;
                 }
+
+                // --- GLOWSTICK BAR --- //
+                player._onGlowStickCountChanged.AddListener(UpdateGlowStickBar);
+                UpdateGlowStickBar(player.GetCurrentAmountOfGlowSticks());
             }
         }
     }
 
-    public void UpdateHealth(float startHealth, float currentHealth)
+    private void UpdateHealth(float startHealth, float currentHealth)
     {
-        if (_healthbar == null) return;
-        _healthbar.value = (currentHealth / startHealth) * 100.0f;
-        _healthbar.title = string.Format("{0}/{1}", currentHealth, startHealth);
-    }
-
-    public void StartCoolDownBar(float coolDownDuration)
-    {
-        StartCoroutine(UpdateCooldownBar(coolDownDuration));
+        if (_healthbar != null)
+        {
+            _healthbar.value = (currentHealth / startHealth) * MAX_PERCENTAGE;
+            _healthbar.title = string.Format("{0}/{1}", currentHealth, startHealth);
+        }
     }
 
     private IEnumerator UpdateCooldownBar(float coolDownDuration)
@@ -107,5 +111,19 @@ public class HUD : MonoBehaviour
 
             yield return null;
         }
+    }
+
+    private void UpdateGlowStickBar(int amountOfSticks)
+    {
+        if (_glowStickBar != null)
+        {
+            _glowStickBar.value = amountOfSticks * MAX_PERCENTAGE;
+            _glowStickBar.title = string.Format("{0} Glowsticks", amountOfSticks);
+        }
+    }
+
+    private void StartCoolDownBar(float coolDownDuration)
+    {
+        StartCoroutine(UpdateCooldownBar(coolDownDuration));
     }
 }
