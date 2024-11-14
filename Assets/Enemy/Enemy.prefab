@@ -121,8 +121,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _glowStickSocket: {fileID: 0}
-  _movementSpeed: 8
-  _chaseRange: 5
+  _movementSpeed: 6
+  _chaseRange: 7
 --- !u!1001 &2725899770411670892
 PrefabInstance:
   m_ObjectHideFlags: 0

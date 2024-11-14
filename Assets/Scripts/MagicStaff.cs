@@ -1,12 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.VFX;
 
 public class MagicStaff : MonoBehaviour
 {
     [SerializeField]
     private List<GameObject> _spellPrefabs = new List<GameObject>();
+
+    [SerializeField]
+    private VisualEffect _spellSwitchFX;
 
     private GameObject _currentSpell = null;
     private int _currentSpellIndex;
@@ -36,6 +41,8 @@ public class MagicStaff : MonoBehaviour
 
         //Print out spell name
         Debug.Log("Current spell: " + _currentSpell);
+
+        _spellSwitchFX.Play();
     }
 
     public void CastSpell()
