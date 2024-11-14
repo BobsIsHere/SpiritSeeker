@@ -28,6 +28,11 @@ public class NavMeshMovementBehaviour : MovementBehaviour
 
     private PlayerCharacter _playerScript;
 
+    private GameObject _currentGlowStick;
+    private float _glowStickCheckInterval = 1.0f;
+    private float _glowStickCheckTimer = 0.0f;
+    private float _glowStickRange = 10.0f;
+
     protected override void Awake()
     {
         base.Awake();
@@ -50,7 +55,8 @@ public class NavMeshMovementBehaviour : MovementBehaviour
     {
         if(_isFrozen)
         {
-            if(Time.time >= _freezeEndTime)
+            // Check if freeze duration has ended
+            if (Time.time >= _freezeEndTime)
             {
                 Unfreeze();
             }
@@ -60,8 +66,33 @@ public class NavMeshMovementBehaviour : MovementBehaviour
 
         float distanceToPlayer = Vector3.Distance(transform.position, _player.transform.position);
 
+        // Check for glow sticks if none is currently targeted
+        if (_currentGlowStick == null)
+        {
+            _glowStickCheckTimer += Time.fixedDeltaTime;
+            if (_glowStickCheckTimer >= _glowStickCheckInterval)
+            {
+                _glowStickCheckTimer = 0.0f;
+                _currentGlowStick = FindNearestGlowStick();
+            }
+        }
+
+        // If a glow stick is found within range, move towards it
+        if (_currentGlowStick != null)
+        {
+            float distanceToGlowStick = Vector3.Distance(transform.position, _currentGlowStick.transform.position);
+            if (distanceToGlowStick <= _glowStickRange)
+            {
+                MoveTowardsGlowStick();
+            }
+            else
+            {
+                _currentGlowStick = null;
+                _navMeshAgent.stoppingDistance = 0.0f;
+            }
+        }
         // If player is not hiding and is within chase range, start chasing
-        if (distanceToPlayer <= _chaseRange && !_playerScript.IsHiding())
+        else if (distanceToPlayer <= _chaseRange && !_playerScript.IsHiding())
         {
             if (!_isChasing)
             {
@@ -78,6 +109,37 @@ public class NavMeshMovementBehaviour : MovementBehaviour
             }
 
             HandleWandering();
+        }
+    }
+
+    private GameObject FindNearestGlowStick()
+    {
+        GameObject[] glowSticks = GameObject.FindGameObjectsWithTag("GlowStick");
+        GameObject nearestGlowStick = null;
+        float nearestDistance = Mathf.Infinity;
+
+        // Iterate through all glows sticks & find nearest one
+        foreach (GameObject glowStick in glowSticks)
+        {
+            // Check if this glow stick is closer than previously found one & within range
+            float distance = Vector3.Distance(transform.position, glowStick.transform.position);
+            if (distance < nearestDistance && distance <= _glowStickRange)
+            {
+                nearestGlowStick = glowStick;
+                nearestDistance = distance;
+            }
+        }
+
+        return nearestGlowStick;
+    }
+
+    private void MoveTowardsGlowStick()
+    {
+        if (_currentGlowStick != null)
+        {
+            _navMeshAgent.stoppingDistance = 3.0f;
+            _navMeshAgent.SetDestination(_currentGlowStick.transform.position);
+            _navMeshAgent.isStopped = false;
         }
     }
 

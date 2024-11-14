@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5976388370822491839}
   m_Layer: 0
   m_Name: GlowStick
-  m_TagString: Untagged
+  m_TagString: GlowStick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -98,7 +98,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 10
-  _upwardForce: 5
   _lifeTime: 5
 --- !u!1 &8587576799535472380
 GameObject:
