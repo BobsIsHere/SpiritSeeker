@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class PlayerCharacter : BasicCharacter
 {
@@ -34,7 +35,7 @@ public class PlayerCharacter : BasicCharacter
     private GameObject _glowstickPrefab;
 
     [SerializeField]
-    private Transform _glowStickSocket; 
+    private Transform _glowStickSocket;
 
     private Health _playerHealth;
 
@@ -110,6 +111,7 @@ public class PlayerCharacter : BasicCharacter
         HandleHideInput();
 
         _currentCoolDownTimer += Time.deltaTime;
+
     }
 
     private void HandleMovementInput()
@@ -216,6 +218,7 @@ public class PlayerCharacter : BasicCharacter
     private bool IsNearCover()
     {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, COVER_RADIUS);
+
         foreach (Collider collider in hitColliders)
         {
             Debug.Log("Detected object: " + collider.gameObject.name + " with tag: " + collider.tag);
