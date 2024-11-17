@@ -37,7 +37,7 @@ public class Spell : MonoBehaviour
     static readonly string[] RAYCAST_MASK = { "Ground", "StaticLevel" };
     bool WallDetection()
     {
-        Ray collisionRay = new Ray(transform.position, transform.forward);
+        Ray collisionRay = new Ray(transform.position, _spellDirection);
         if (Physics.Raycast(collisionRay, Time.fixedDeltaTime * _spellSpeed, LayerMask.GetMask(RAYCAST_MASK)))
         {
             Invoke(KILL_METHOD, _soundEffect.length - _lifeTime);
