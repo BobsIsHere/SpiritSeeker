@@ -14,6 +14,8 @@ public class HUD : MonoBehaviour
     private Health _playerHealth;
     private AttackBehaviour _attackBehaviour;
 
+    private Coroutine _coolDownCoroutine = null;
+
     private const float MAX_PERCENTAGE = 100.0f;
 
     private void Start()
@@ -80,37 +82,34 @@ public class HUD : MonoBehaviour
         }
     }
 
+    private void StartCoolDownBar(float coolDownDuration)
+    {
+        if (_coolDownCoroutine != null)
+        {
+            StopCoroutine(_coolDownCoroutine);
+        }
+
+        _coolDownCoroutine = StartCoroutine(UpdateCooldownBar(coolDownDuration));
+    }
+
     private IEnumerator UpdateCooldownBar(float coolDownDuration)
     {
-        while (true)
+        float elapsedTime = 0.0f;
+
+        while (elapsedTime < coolDownDuration)
         {
-            if (_coolDownBar == null || _attackBehaviour == null)
-            {
-                yield break;
-            }
+            elapsedTime += Time.deltaTime;
+            float remainingTime = coolDownDuration - elapsedTime;
 
-            if (_attackBehaviour.IsOnCooldown)
-            {
-                float elapsedTime = 0.0f;
-
-                while (elapsedTime < coolDownDuration)
-                {
-                    elapsedTime += Time.deltaTime;
-                    float remainingTime = coolDownDuration - elapsedTime;
-
-                    float progress = Mathf.Clamp01(elapsedTime / coolDownDuration);
-                    _coolDownBar.value = progress * 100;
-                    _coolDownBar.title = string.Format("{0:0.0} seconds", remainingTime);
-
-                    yield return null;
-                }
-            }
-
-            _coolDownBar.value = 0;
-            _coolDownBar.title = "0.0 seconds";
+            float progress = Mathf.Clamp01(elapsedTime / coolDownDuration);
+            _coolDownBar.value = progress * MAX_PERCENTAGE;
+            _coolDownBar.title = string.Format("{0:0.0} seconds", remainingTime);
 
             yield return null;
         }
+
+        _coolDownBar.value = 0;
+        _coolDownBar.title = "0.0 seconds";
     }
 
     private void UpdateGlowStickBar(int amountOfSticks)
@@ -120,10 +119,5 @@ public class HUD : MonoBehaviour
             _glowStickBar.value = amountOfSticks * MAX_PERCENTAGE;
             _glowStickBar.title = string.Format("{0} Glowsticks", amountOfSticks);
         }
-    }
-
-    private void StartCoolDownBar(float coolDownDuration)
-    {
-        StartCoroutine(UpdateCooldownBar(coolDownDuration));
     }
 }
