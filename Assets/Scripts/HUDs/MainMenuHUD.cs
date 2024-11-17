@@ -37,7 +37,7 @@ public class MainMenuHUD : MonoBehaviour
 
     private void OnStartGameClicked()
     {
-        SceneManager.LoadScene("SpiritSeeker");
+        SceneManager.LoadScene("TutorialScene");
     }
 
     private void OnControlsClicked()

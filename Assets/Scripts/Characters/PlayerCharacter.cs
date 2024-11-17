@@ -41,6 +41,8 @@ public class PlayerCharacter : BasicCharacter
 
     private Rigidbody _rigidbody;
 
+    private MeshRenderer _hidePrompt;
+
     private bool _isHiding = false;
 
     private const int MAX_GLOWSTICKS = 3;
@@ -53,7 +55,7 @@ public class PlayerCharacter : BasicCharacter
     private const string ENEMY_TAG = "Enemy";
     private const string COVER_TAG = "Cover";
 
-    private const float COVER_RADIUS = 5.0f;
+    private const float COVER_RADIUS = 1.5f;
     private const float HIDE_DURATION = 5.0f;
 
     protected override void Awake()
@@ -73,6 +75,12 @@ public class PlayerCharacter : BasicCharacter
 
         _rigidbody = GetComponent<Rigidbody>();
         if (_rigidbody == null)
+        {
+            return;
+        }
+
+        _hidePrompt = transform.Find("HidePrompt").GetComponent<MeshRenderer>();
+        if (_hidePrompt == null)
         {
             return;
         }
@@ -161,9 +169,20 @@ public class PlayerCharacter : BasicCharacter
 
     private void HandleHideInput()
     {
-        if (_hideAction.action.triggered && IsNearCover())
+        if (IsNearCover())
         {
-            ToggleHide();
+            _hidePrompt.enabled = true;
+            if (_hideAction.action.triggered)
+            {
+                ToggleHide();
+            }
+        }
+        else
+        {
+            if (_hidePrompt.enabled)
+            {
+                _hidePrompt.enabled = false;
+            }
         }
     }
 
