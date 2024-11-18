@@ -33,6 +33,9 @@ public class NavMeshMovementBehaviour : MovementBehaviour
     private float _glowStickCheckTimer = 0.0f;
     private float _glowStickRange = 10.0f;
 
+    private Color _originalColor;
+    private SkinnedMeshRenderer _enemyRenderer;
+
     protected override void Awake()
     {
         base.Awake();
@@ -53,17 +56,6 @@ public class NavMeshMovementBehaviour : MovementBehaviour
 
     protected override void FixedUpdate()
     {
-        if(_isFrozen)
-        {
-            // Check if freeze duration has ended
-            if (Time.time >= _freezeEndTime)
-            {
-                Unfreeze();
-            }
-
-            return;
-        }
-
         float distanceToPlayer = Vector3.Distance(transform.position, _player.transform.position);
 
         // Check for glow sticks if none is currently targeted
@@ -199,20 +191,41 @@ public class NavMeshMovementBehaviour : MovementBehaviour
         }
     }
 
-    public void Freeze(float freezeDuration)
+    public void Freeze(float freezeDuration, SkinnedMeshRenderer enemyRenderer)
     {
         if(!_isFrozen)
         {
             _isFrozen = true;
             _freezeEndTime = Time.time + freezeDuration;
             _navMeshAgent.isStopped = true;
+
+            _enemyRenderer = enemyRenderer;
+            Material material = _enemyRenderer.material;
+            _originalColor = material.GetColor("_MainColor");
+
+            material.SetColor("_MainColor", Color.blue);
+
+            StartCoroutine(UnfreezeAfterDuration(freezeDuration));
         }
+    }
+
+    private IEnumerator UnfreezeAfterDuration(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+
+        Unfreeze();
     }
 
     private void Unfreeze()
     {
         _isFrozen = false;
         _navMeshAgent.isStopped = false;
+
+        if (_enemyRenderer != null)
+        {
+            Material material = _enemyRenderer.material;
+            material.SetColor("_MainColor", _originalColor);
+        }
     }
 
     private void StartChasing()

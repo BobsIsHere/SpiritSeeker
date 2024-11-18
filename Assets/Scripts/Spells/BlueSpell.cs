@@ -9,25 +9,34 @@ public class BlueSpell : Spell
     [SerializeField]
     private float _freezeDuration = 3.0f;
 
+    private Color _freezeColor = Color.blue;
+
     protected override void Awake()
     {
         base.Awake();
     }
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Enemy"))
         {
             NavMeshMovementBehaviour movementBehaviour = other.GetComponent<NavMeshMovementBehaviour>();
 
-            if(movementBehaviour != null)
+            Transform colliderTransform = other.transform.Find("Ghost");
+            SkinnedMeshRenderer ghostObj = null;
+
+            if (colliderTransform != null)
             {
-                movementBehaviour.Freeze(_freezeDuration);
+                ghostObj = colliderTransform.Find("GhostMesh").GetComponent<SkinnedMeshRenderer>();
+            }
+
+            if (movementBehaviour != null)
+            {
+                movementBehaviour.Freeze(_freezeDuration, ghostObj);
+                //StartCoroutine(ChangeColorTemporarily(ghostObj, _freezeDuration));
             }
 
             Kill();
         }
     }
-
-    //TODO : Function to change material of specific enemy
 }
