@@ -11,7 +11,7 @@ public class MagicStaff : MonoBehaviour
     private List<GameObject> _spellPrefabs = new List<GameObject>();
 
     [SerializeField]
-    private VisualEffect _spellSwitchFX;
+    private List<VisualEffect> _spellSwitchFXs = new List<VisualEffect>();
 
     private GameObject _currentSpell = null;
     private int _currentSpellIndex;
@@ -42,7 +42,7 @@ public class MagicStaff : MonoBehaviour
         //Print out spell name
         Debug.Log("Current spell: " + _currentSpell);
 
-        _spellSwitchFX.Play();
+        _spellSwitchFXs[_currentSpellIndex].Play();
     }
 
     public void CastSpell()
