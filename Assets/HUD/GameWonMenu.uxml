@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/HUD/MainMenuHUD.uss?fileID=7433441132597879392&amp;guid=60748f2b420dff54885bc94e41cd96b3&amp;type=3#MainMenuHUD" />
+    <ui:VisualElement name="Panel" class="menu" style="flex-grow: 1;">
+        <ui:VisualElement style="flex-grow: 1; margin-top: 150px; margin-right: 300px; margin-left: 300px;">
+            <ui:Label tabindex="-1" text="YOU RESCUED ALL SPIRITS !!" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Title" class="title" style="font-size: 30px; -unity-font: url(&quot;project://database/Assets/FPSFont/Square-Black.ttf?fileID=12800000&amp;guid=d7cffddcbc0cc8f4ebe6e28eb9804082&amp;type=3#Square-Black&quot;); -unity-font-style: bold; align-self: center;" />
+            <ui:Button text="Restart" parse-escape-sequences="true" display-tooltip-when-elided="true" name="RestartButton" class="unity-button" />
+            <ui:Button text="Go Back" parse-escape-sequences="true" display-tooltip-when-elided="true" name="GoBackButton" class="unity-button" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

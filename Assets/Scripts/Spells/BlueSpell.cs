@@ -28,4 +28,6 @@ public class BlueSpell : Spell
             Kill();
         }
     }
+
+    //TODO : Function to change material of specific enemy
 }

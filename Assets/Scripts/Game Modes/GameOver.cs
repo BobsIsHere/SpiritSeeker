@@ -19,6 +19,6 @@ public class GameOver : MonoBehaviour
     private void OnPlayerDeath()
     {
         Debug.Log("Game Over");
-        SceneManager.LoadScene("SpiritSeeker");
+        GameManager.Instance.LoadScene("GameOverScene");
     }
 }

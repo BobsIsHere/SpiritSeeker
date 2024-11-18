@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameWon : MonoBehaviour
 {
+    [SerializeField]
+    private string _sceneName;
+
     private const string SPIRIT_TAG = "Spirit";
     private GameObject[] _spirits;
 
@@ -24,7 +28,7 @@ public class GameWon : MonoBehaviour
     private void OnGameWon()
     {
         Debug.Log("Game Won");
-        SceneManager.LoadScene("SpiritSeeker");
+        GameManager.Instance.LoadScene(_sceneName);
     }
 
     private bool AllSpiritsCollected()

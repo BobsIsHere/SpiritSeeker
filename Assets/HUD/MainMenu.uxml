@@ -1,6 +1,11 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Label tabindex="-1" text="SPIRIT SEEKER" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SpiritSeeker" style="align-items: center; align-self: center; bottom: -150px; font-size: 30px; -unity-font-style: bold; -unity-font: url(&quot;project://database/Assets/FPSFont/Square-Black.ttf?fileID=12800000&amp;guid=d7cffddcbc0cc8f4ebe6e28eb9804082&amp;type=3#Square-Black&quot;); -unity-text-align: upper-center;" />
-    <ui:Button text="Start Game" parse-escape-sequences="true" display-tooltip-when-elided="true" name="StartButton" style="text-overflow: clip; justify-content: flex-start; align-self: center; width: 150px; transform-origin: center; margin-top: 200px; flex-direction: column; -unity-text-align: middle-center;" />
-    <ui:Button text="Controls" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ControlsButton" style="align-self: center; width: 150px; margin-top: 5px;" />
-    <ui:Button text="Quit Game" parse-escape-sequences="true" display-tooltip-when-elided="true" name="QuitButton" style="align-self: center; width: 150px; margin-top: 5px;" />
+    <Style src="project://database/Assets/HUD/MainMenuHUD.uss?fileID=7433441132597879392&amp;guid=60748f2b420dff54885bc94e41cd96b3&amp;type=3#MainMenuHUD" />
+    <ui:VisualElement name="Panel" class="menu" style="flex-grow: 1; background-color: rgb(72, 108, 104);">
+        <ui:VisualElement style="flex-grow: 1; margin-left: 300px; margin-right: 300px; margin-top: 150px;">
+            <ui:Label tabindex="-1" text="SPIRIT SEEKER" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SpiritSeeker" class="title" style="align-items: center; align-self: center; -unity-font: url(&quot;project://database/Assets/FPSFont/Square-Black.ttf?fileID=12800000&amp;guid=d7cffddcbc0cc8f4ebe6e28eb9804082&amp;type=3#Square-Black&quot;); font-size: 30px; -unity-font-style: bold;" />
+            <ui:Button text="Start Game" parse-escape-sequences="true" display-tooltip-when-elided="true" name="StartButton" />
+            <ui:Button text="Controls" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ControlsButton" class="unity-button" />
+            <ui:Button text="Quit" parse-escape-sequences="true" display-tooltip-when-elided="true" name="QuitButton" class="unity-button" />
+        </ui:VisualElement>
+    </ui:VisualElement>
 </ui:UXML>

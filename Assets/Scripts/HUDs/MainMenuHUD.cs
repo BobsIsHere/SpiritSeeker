@@ -37,12 +37,12 @@ public class MainMenuHUD : MonoBehaviour
 
     private void OnStartGameClicked()
     {
-        SceneManager.LoadScene("TutorialScene");
+        GameManager.Instance.LoadScene("TutorialScene");
     }
 
     private void OnControlsClicked()
     {
-        SceneManager.LoadScene("ControlMenu");
+        GameManager.Instance.LoadScene("ControlMenu");
     }
 
     private void OnQuitGameClicked()

@@ -31,6 +31,6 @@ public class ControlsMenuHUD : MonoBehaviour
 
     void OnGoBackToMenuClicked()
     {
-        SceneManager.LoadScene("MainMenu");
+        GameManager.Instance.LoadScene("MainMenu");
     }
 }
