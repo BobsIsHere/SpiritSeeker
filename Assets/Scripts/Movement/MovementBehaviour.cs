@@ -54,7 +54,10 @@ public class MovementBehaviour : MonoBehaviour
 
     protected virtual void HandleMovement()
     {
-        if (_rigidBody == null) return;
+        if (_rigidBody == null)
+        {
+            return;
+        }
 
         Vector3 movement = _desiredMovementDirection.normalized;
         movement *= _movementSpeed;

@@ -206,7 +206,9 @@ public class PlayerCharacter : BasicCharacter
         else if (other.tag == ENEMY_TAG)
         {
             if (_isHiding)
+            {
                 return;
+            }
 
             if (_currentCoolDownTimer >= COOLDOWN_TIMER)
             {

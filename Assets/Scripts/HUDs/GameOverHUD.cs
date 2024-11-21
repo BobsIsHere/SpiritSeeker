@@ -11,7 +11,7 @@ public class GameOverHUD : MonoBehaviour
 
     private Button _restartButton = null;
     private Button _goBackButton = null;
-    // Start is called before the first frame update
+    
     void Start()
     {
         _attachedDocument = GetComponent<UIDocument>();
@@ -37,7 +37,7 @@ public class GameOverHUD : MonoBehaviour
 
         if (!string.IsNullOrEmpty(GameManager._lastScene))
         {
-            GameManager.Instance.LoadScene(GameManager._lastScene); // Load the last scene
+            GameManager.Instance.LoadScene(GameManager._lastScene);
         }
         else
         {

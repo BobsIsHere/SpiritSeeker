@@ -9,8 +9,6 @@ public class BlueSpell : Spell
     [SerializeField]
     private float _freezeDuration = 3.0f;
 
-    private Color _freezeColor = Color.blue;
-
     protected override void Awake()
     {
         base.Awake();
@@ -33,7 +31,6 @@ public class BlueSpell : Spell
             if (movementBehaviour != null)
             {
                 movementBehaviour.Freeze(_freezeDuration, ghostObj);
-                //StartCoroutine(ChangeColorTemporarily(ghostObj, _freezeDuration));
             }
 
             Kill();
